@@ -1,0 +1,14 @@
+-Skill system
+-Alert level AI
+
+-Ranged Combat
+-Magic Combat
+
+-Inventory
+-Equipment system of some kind
+-Spell Scrolls/Books
+
+-Actual UI
+
+-Varied spell types
+-Varied enemy types

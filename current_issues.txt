@@ -1,0 +1,13 @@
+-Enemies cannot path down a hallway if another enemy is in the way
+
+-mousing over enemies to see information doesn't always work
+
+
+
+
+
+
+
+
+
+-Consider min/max replacements

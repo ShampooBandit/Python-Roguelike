@@ -1,0 +1,24 @@
+ID,NAME,EXPERIENCE,MAX LEVEL,TYPE,DAMAGE MODIFIER,ACCURACY MODIFIER,CRIT DAMAGE MODIFIER,CRIT CHANCE MODIFIER,REQUIREMENTS
+1,Punching,100,10,Blunt,L,L/2,L,L/10,0
+2,Tackling,2,10,Blunt,L,L/2,L,L/10,0
+3,Scratching,100,10,Slash,L,L/2,L,L/10,0
+4,Kicking,100,10,Blunt,L,L/2,L,L/10,0
+5,Biting,300,10,Pierce,L,L/2,L,L/10,0
+6,,,,,,,,,
+7,,,,,,,,,
+8,,,,,,,,,
+9,,,,,,,,,
+10,,,,,,,,,
+11,,,,,,,,,
+12,,,,,,,,,
+13,,,,,,,,,
+14,,,,,,,,,
+15,,,,,,,,,
+16,,,,,,,,,
+17,,,,,,,,,
+18,,,,,,,,,
+19,,,,,,,,,
+20,,,,,,,,,
+21,,,,,,,,,
+22,,,,,,,,,
+23,,,,,,,,,
