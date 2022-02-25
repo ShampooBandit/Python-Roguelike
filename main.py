@@ -10,6 +10,7 @@ import tcod.noise
 import tcod.map as tmap
 
 import class_camera as cam
+import class_newui as newui
 import class_actor as act
 import class_tile as tile
 import class_race as race
@@ -17,6 +18,8 @@ import class_log as log
 import class_map as mp
 import class_ui as ui
 import generate as gen
+
+import data_ui
 
 render_fov = True
 current_floor = 0
@@ -197,15 +200,28 @@ def key_switcher(arg):
 
     return func()
 
+def update_newUI(newUi, actors, combat_log):
+    newUi.layers[0].windows[0].add_content(newui.Text(1, 1, f'Race: {actors[0].race[1]}'))
+    newUi.layers[0].windows[0].add_content(newui.Text(1, 2, '─────────────────'))
+    newUi.layers[0].windows[0].add_content(newui.Text(1, 3, f'HP: {actors[0].stats[0]} / {actors[0].stats[1]}'))
+    newUi.layers[0].windows[0].add_content(newui.Text(1, 4, f'SP: {actors[0].stats[2]} / {actors[0].stats[3]}'))
+    newUi.layers[0].windows[0].add_content(newui.Text(1, 5, f'STR: {actors[0].stats[4]:<4} INT: {actors[0].stats[7]}'))
+    newUi.layers[0].windows[0].add_content(newui.Text(1, 6, f'DEX: {actors[0].stats[5]:<4} WIL: {actors[0].stats[8]}'))
+    newUi.layers[0].windows[0].add_content(newui.Text(1, 7, f'CON: {actors[0].stats[6]:<4} SPI: {actors[0].stats[9]}'))
+    newUi.layers[0].windows[0].add_content(newui.Text(1, 8, f'PER: {actors[0].stats[10]:<4} LUK: {actors[0].stats[11]}'))
+    
+    newUi.layers[0].windows[1].add_content(newui.Text(1, 1, combat_log.text))
+    return
+
 def update_UI(main_ui, actors, combat_log):
-    main_ui.layers[0][0].content_layers[0].lines[0] = f'Race: {actors[0].race[1]}'
-    main_ui.layers[0][0].content_layers[0].lines[1] = '──────────────────'
-    main_ui.layers[0][0].content_layers[0].lines[2] = f'HP: {actors[0].stats[0]} / {actors[0].stats[1]}'
-    main_ui.layers[0][0].content_layers[0].lines[3] = f'SP: {actors[0].stats[2]} / {actors[0].stats[3]}'
-    main_ui.layers[0][0].content_layers[0].lines[4] = f'STR: {actors[0].stats[4]:<4} INT: {actors[0].stats[7]}'
-    main_ui.layers[0][0].content_layers[0].lines[5] = f'DEX: {actors[0].stats[5]:<4} WIL: {actors[0].stats[8]}'
-    main_ui.layers[0][0].content_layers[0].lines[6] = f'CON: {actors[0].stats[6]:<4} SPI: {actors[0].stats[9]}'
-    main_ui.layers[0][0].content_layers[0].lines[7] = f'PER: {actors[0].stats[10]:<4} LUK: {actors[0].stats[11]}'
+    main_ui.layers[0].content[0].lines[0] = f'Race: {actors[0].race[1]}'
+    main_ui.layers[0].content[0].lines[1] = '──────────────────'
+    main_ui.layers[0].content[0].lines[2] = f'HP: {actors[0].stats[0]} / {actors[0].stats[1]}'
+    main_ui.layers[0].content[0].lines[3] = f'SP: {actors[0].stats[2]} / {actors[0].stats[3]}'
+    main_ui.layers[0].content[0].lines[4] = f'STR: {actors[0].stats[4]:<4} INT: {actors[0].stats[7]}'
+    main_ui.layers[0].content[0].lines[5] = f'DEX: {actors[0].stats[5]:<4} WIL: {actors[0].stats[8]}'
+    main_ui.layers[0].content[0].lines[6] = f'CON: {actors[0].stats[6]:<4} SPI: {actors[0].stats[9]}'
+    main_ui.layers[0].content[0].lines[7] = f'PER: {actors[0].stats[10]:<4} LUK: {actors[0].stats[11]}'
 
     a = ''
     text = ['Race: ',
@@ -430,7 +446,26 @@ main_ui.layers[0][0].clickables[2].args = (con)
 #actors = arrays[0]
 #dungeon = arrays[1]
 
+new_ui = newui.UI(con)
+new_ui.add_window(data_ui.stat_screen(), 0)
+new_ui.add_window(data_ui.combat_log(), 0)
+
+actors.append(act.Actor(name='Test', sprite='@',xpos=5, ypos=5, race=races.stats[0].split(','), floor=current_floor))
+update_newUI(new_ui, actors, combat_log)
+
 #CORE GAME LOOP
+while True:
+    con.clear()
+
+    for event in tcod.event.get():
+        if event.type == 'KEYDOWN':
+            combat_log.pushLine('Testing')
+
+    new_ui.render()
+
+    tcod.console_flush()
+
+"""
 while True:
     oldtime = get_time()
     con.clear()
@@ -509,3 +544,4 @@ while True:
     main_ui.render((mousex, mousey))
         
     tcod.console_flush()
+"""
